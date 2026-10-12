@@ -2,7 +2,9 @@ import unittest
 from src.task_manager import add_task, delete_task, filter_tasks_by_status
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
+from datetime import date, timedelta
 import os
+
 
 TEST_FILE = "test_tasks.bin"
 
@@ -59,6 +61,19 @@ class TestTaskManager(unittest.TestCase):
         """
         result = add_task(self.tasks, "Test Task", "Description", "2024-12-01")
         self.assertFalse(result)
+
+    def test_add_past_due_date(self):
+        """
+        Test adding a task with a past due date.
+        Verify that the function rejects past dates and returns False.
+        """
+        yesterday = date.today() - timedelta(days=1)
+        due_date = yesterday.strftime("%d-%m-%Y")
+
+        result = add_task(self.tasks, "Test Task", "Description", due_date)
+
+        self.assertFalse(result)
+        self.assertEqual(len(self.tasks), 0)
 
     def test_delete_task(self):
         """
