@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import datetime
+from datetime import datetime, date
 
 
 def add_task(tasks, title, description, due_date):
@@ -27,11 +27,9 @@ def add_task(tasks, title, description, due_date):
         print("Error: A task with this title already exists.")
         return False
 
-    # Validate due date format
-    try:
-        datetime.strptime(due_date, "%d-%m-%Y")
-    except ValueError:
-        print("Error: Invalid date format. Use DD-MM-YYYY.")
+    # Validate due date
+    if not validate_due_date(due_date):
+        print("Error: Due date must be today or a future date (DD-MM-YYYY).")
         return False
 
     tasks.append(Task(title, description, due_date))
@@ -108,3 +106,17 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+def validate_due_date(due_date):
+     """
+    Validate the due date is in the correct format.
+    Args:
+        due_date (str): The due date of the task.
+    Returns:
+        bool: True if the date is valid and is today or in the future, False otherwise.
+    """
+     try:
+         task_date = datetime.strptime(due_date, "%d-%m-%Y").date()
+         return task_date >= date.today()
+     except ValueError:
+         return False
