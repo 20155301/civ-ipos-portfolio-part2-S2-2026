@@ -293,3 +293,13 @@ When the PR is merged, the Issue will be automatically closed if you included "f
    - Answered knowledge questions with thoughtful insights.
 
 ---
+## **Application Features and Fixes**
+
+1. Issue 1 - Due Date Validation
+   - A reusable validate_due_date() function has been implemented in task_manager.py using datetime module.
+   The function validates:
+   - The due date follows the DD-MM-YYYY format.
+   - The due date is a valid calendar date.
+   - The due date is today or a future date.
+   If the validation fail:
+   - The application displays an error message and the task is not created.
