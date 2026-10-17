@@ -2,6 +2,7 @@ import unittest
 from src.task_manager import add_task, delete_task, filter_tasks_by_status
 from src.file_handler import save_tasks, load_tasks
 from src.task import Task
+from src.task_manager import edit_task
 import os
 
 TEST_FILE = "test_tasks.bin"
@@ -94,6 +95,29 @@ class TestTaskManager(unittest.TestCase):
         loaded_tasks = load_tasks()
         self.assertEqual(len(loaded_tasks), 1)
         self.assertEqual(loaded_tasks[0].title, "Persistent Task")
+
+    def test_edit_task(self):
+        """
+        Test editing a task by its title.
+        Verify that the task is successfully edited.
+        """
+
+        task = Task("Test Task", "Test Description", "20-12-2027")
+        self.tasks.append(task)
+
+        result = edit_task(
+            self.tasks,
+            "Test Task",
+            "Updated Task",
+            "Updated Description",
+            "25-12-2027"
+        )
+
+        self.assertTrue(result)
+        self.assertEqual(task.title, "Updated Task")
+        self.assertEqual(task.description, "Updated Description")
+        self.assertEqual(task.due_date, "25-12-2027")
+        self.assertEqual(task.status, "pending")
 
 
 if __name__ == "__main__":

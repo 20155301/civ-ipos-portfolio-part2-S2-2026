@@ -108,3 +108,6 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+def edit_task(tasks, title, new_title, new_description, new_due_date):
+
