@@ -108,6 +108,7 @@ def filter_tasks_by_status(tasks, status):
     """
     return [task for task in tasks if task.status == status]
 
+
 def validate_due_date(due_date):
     """
     Validate that the due date is today or in the future
