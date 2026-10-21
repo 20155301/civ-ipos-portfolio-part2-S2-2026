@@ -18,12 +18,10 @@ def main():
             description = input("Description: ")
             due_date = input("Due Date (DD-MM-YYYY): ")
             add_task(tasks, title, description, due_date)
+
         elif choice == "2":
-            title = input("Title of the task to delete: ")
-            if delete_task(tasks, title):
-                print("Task deleted successfully.")
-            else:
-                print("Task not found.")
+            handle_delete_task(tasks)
+
         elif choice == "3":
             list_tasks(tasks)
 
@@ -69,6 +67,25 @@ def handle_edit_task(tasks):
         print("Task edited successfully.")
     else:
         print("Task could not be edited.")
+
+
+def handle_delete_task(tasks):
+    """
+    Handle user input for deleting an existing task.
+
+    Prompts the user to enter the title of the task to delete.
+    Calls delete_task() to remove the selected task and displays
+    a message indicating whether the deletion was successful.
+
+    Args:
+        tasks (list): The list of existing Task objects.
+    """
+    title = input("Title of the task to delete: ")
+
+    if delete_task(tasks, title):
+        print("Task deleted successfully.")
+    else:
+        print("Task not found.")
 
 
 if __name__ == "__main__":
