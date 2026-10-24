@@ -293,3 +293,26 @@ When the PR is merged, the Issue will be automatically closed if you included "f
    - Answered knowledge questions with thoughtful insights.
 
 ---
+
+## Application Features and Fixes
+
+### 1. Issue #1 – Due Date Validation (Bug Fix)
+
+A reusable `validate_due_date()` function has been implemented in `task_manager.py` using the third-party `python-dateutil` library and Python's built-in `datetime` module.
+
+The function validates that:
+- The entered due date is a valid calendar date.
+- The due date is today or a future date.
+- Different date formats can be parsed, such as `DD-MM-YYYY` and `DD/MM/YYYY`.
+
+If validation fails:
+- The application displays an error message.
+- The task is not created.
+
+**Reusable Component:**
+
+The `python-dateutil` library was selected to provide flexible date parsing without requiring custom parsing logic. The `validate_due_date()` function can also be reused by other functions, such as editing an existing task.
+
+**Unit Testing:**
+
+A unit test was added to verify that tasks cannot be created with past due dates.
