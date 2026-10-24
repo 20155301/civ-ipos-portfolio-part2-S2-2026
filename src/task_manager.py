@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import date
+from datetime import date, datetime
 from dateutil import parser
 
 
@@ -147,8 +147,8 @@ def edit_task(tasks, title, new_title, new_description, new_due_date):
 
     print("Error: Task not found.")
     return False
-  
-  
+
+
 def validate_due_date(due_date):
     """
     Validate that the due date is today or in the future
