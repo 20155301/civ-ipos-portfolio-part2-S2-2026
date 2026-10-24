@@ -1,6 +1,6 @@
 from src.task import Task
 from src.file_handler import save_tasks
-from datetime import date
+from datetime import date, datetime
 from dateutil import parser
 
 
@@ -107,6 +107,46 @@ def filter_tasks_by_status(tasks, status):
         list: A list of Task objects that match the specified status.
     """
     return [task for task in tasks if task.status == status]
+
+
+def edit_task(tasks, title, new_title, new_description, new_due_date):
+    """
+    Edit an existing tasks title, description, and due date.
+
+    Args:
+        tasks (list): The list of existing Task objects.
+        title (str): The title of the task to be edited.
+        new_title (str): The new title of the task to be edited.
+        new_description (str): The new description of the task to be edited.
+        new_due_date (str): The new due date of the task to be edited.
+
+    Returns:
+        bool: True if the task is edited successfully, False otherwise.
+
+    """
+
+    for task in tasks:
+        if task.title == title:
+
+            if any(t.title == new_title and t is not task for t in tasks):
+                print("A task with this title already exists.")
+                return False
+
+            try:
+                datetime.strptime(new_due_date, "%d-%m-%Y")
+            except ValueError:
+                print("Error: Invalid date format. Use DD-MM-YYYY.")
+                return False
+
+            task.title = new_title
+            task.description = new_description
+            task.due_date = new_due_date
+
+            save_tasks(tasks)
+            return True
+
+    print("Error: Task not found.")
+    return False
 
 
 def validate_due_date(due_date):

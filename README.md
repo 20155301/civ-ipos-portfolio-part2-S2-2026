@@ -293,7 +293,6 @@ When the PR is merged, the Issue will be automatically closed if you included "f
    - Answered knowledge questions with thoughtful insights.
 
 ---
-
 ## Application Features and Fixes
 
 ### 1. Issue #1 – Due Date Validation (Bug Fix)
@@ -316,3 +315,21 @@ The `python-dateutil` library was selected to provide flexible date parsing with
 **Unit Testing:**
 
 A unit test was added to verify that tasks cannot be created with past due dates.
+
+### 2. Issue #2 – Edit Existing Tasks (New Feature)
+
+An edit_task() function has been implemented in task_manager.py to allow users to modify existing tasks
+
+the function allows users to:
+   - Edit the title, description and due date of an existing task.
+   - View the existing task list before selecting the task to edit.
+   - Prevent duplicate task titles.
+   - Validate the due date.
+If editing fails:
+   - the application displays an error message.
+   - The existing task details remain unchanged.
+
+**Unit testing:**
+A test_edit_task() unit test was added to verify that an existing task's title, description and due date 
+can be updated successfully.
+
